@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Crear cuenta | Cellar Event Master</title>
+
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+
+<body>
+
+  <main class="auth-page">
+
+    <section class="auth-card">
+
+      <a href="../index.html" class="logo auth-logo">
+        🍷 Cellar Event Master
+      </a>
+
+      <h1>Crear cuenta</h1>
+
+      <p>
+        Registrate para reservar eventos o administrar tus propias bodegas.
+      </p>
+
+      <form id="registerForm" class="auth-form">
+
+        <input
+          type="text"
+          id="firstName"
+          name="firstName"
+          placeholder="Nombre"
+          autocomplete="given-name"
+          required
+        />
+
+        <input
+          type="text"
+          id="lastName"
+          name="lastName"
+          placeholder="Apellido"
+          autocomplete="family-name"
+          required
+        />
+
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Correo electrónico"
+          autocomplete="email"
+          required
+        />
+
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Contraseña"
+          autocomplete="new-password"
+          minlength="6"
+          required
+        />
+
+        <input
+          type="password"
+          id="confirmPassword"
+          name="confirmPassword"
+          placeholder="Confirmar contraseña"
+          autocomplete="new-password"
+          minlength="6"
+          required
+        />
+
+        <div class="form-group">
+          <label for="role">Tipo de cuenta</label>
+
+          <select id="role" name="role" required>
+            <option value="">Seleccioná un tipo de cuenta</option>
+            <option value="cliente">Cliente</option>
+            <option value="organizador">Organizador</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn primary">
+          Crear cuenta
+        </button>
+
+      </form>
+
+      <p
+        id="registerMessage"
+        class="form-message"
+        aria-live="polite"
+      ></p>
+
+      <p class="auth-link">
+        ¿Ya tenés una cuenta?
+        <a href="./login.html">Iniciá sesión</a>
+      </p>
+
+    </section>
+
+  </main>
+
+  <script src="../js/register.js"></script>
+
+</body>
+</html>

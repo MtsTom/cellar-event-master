@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Panel del Organizador | Cellar Event Master
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="../css/styles.css"
+    >
+</head>
+
+<body>
+    <header class="main-header">
+        <nav class="navbar container">
+            <a
+                href="../index.html"
+                class="logo"
+            >
+                Cellar Event Master
+            </a>
+
+            <div class="nav-actions">
+                <a
+                    href="../index.html"
+                    class="secondary-button"
+                >
+                    Inicio
+                </a>
+
+                <a
+                    href="profile.html"
+                    class="secondary-button"
+                >
+                    Mi perfil
+                </a>
+
+                <span
+                    id="organizer-name"
+                    class="user-name"
+                >
+                    Organizador
+                </span>
+
+                <button
+                    id="logout-button"
+                    class="secondary-button"
+                    type="button"
+                >
+                    Cerrar sesión
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="organizer-dashboard container">
+        <section class="dashboard-heading">
+            <div>
+                <p class="section-label">
+                    Panel privado
+                </p>
+
+                <h1>
+                    Dashboard del Organizador
+                </h1>
+
+                <p>
+                    Administrá tus eventos, reservas,
+                    capacidad e ingresos.
+                </p>
+            </div>
+
+            <div class="dashboard-heading-actions">
+    <button
+        id="create-winery-button"
+        class="secondary-button"
+        type="button"
+    >
+        Registrar bodega
+    </button>
+
+    <button
+        id="create-event-button"
+        class="primary-button"
+        type="button"
+    >
+        Crear nuevo evento
+    </button>
+    </div>
+        </section>
+
+        <section
+            id="organizer-summary"
+            class="organizer-summary"
+        >
+            <article class="summary-card">
+                <span>
+                    Eventos
+                </span>
+
+                <strong id="total-events">
+                    0
+                </strong>
+            </article>
+
+            <article class="summary-card">
+                <span>
+                    Reservas confirmadas
+                </span>
+
+                <strong id="total-reservations">
+                    0
+                </strong>
+            </article>
+
+            <article class="summary-card">
+                <span>
+                    Personas reservadas
+                </span>
+
+                <strong id="total-people">
+                    0
+                </strong>
+            </article>
+
+            <article class="summary-card">
+                <span>
+                    Ingresos generados
+                </span>
+
+                <strong id="total-revenue">
+                    $0
+                </strong>
+            </article>
+        </section>
+
+        <section class="dashboard-section">
+            <div class="section-heading">
+                <div>
+                    <p class="section-label">
+                        Gestión
+                    </p>
+
+                    <h2>
+                        Mis eventos
+                    </h2>
+                </div>
+            </div>
+
+            <div
+                id="organizer-message"
+                class="dashboard-message"
+            >
+                Cargando eventos...
+            </div>
+
+            <div
+                id="organizer-events"
+                class="organizer-events-grid"
+            ></div>
+        </section>
+    </main>
+
+    <script src="../js/auth.js"></script>
+
+    <script
+        src="../js/dashboard-organizer.js"
+    ></script>
+</body>
+</html>

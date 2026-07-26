@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>Reservar evento | Cellar Event Master</title>
+
+  <link
+    rel="stylesheet"
+    href="../css/styles.css"
+  />
+</head>
+
+<body class="reservation-page">
+
+  <header class="main-header">
+    <nav class="navbar">
+      <a
+        href="../index.html"
+        class="logo"
+      >
+        🍷 Cellar Event Master
+      </a>
+
+      <div class="nav-actions">
+        <a
+          href="../index.html#events"
+          class="secondary-button"
+        >
+          Volver a eventos
+        </a>
+
+        <button
+          id="logout-button"
+          class="secondary-button"
+          type="button"
+        >
+          Cerrar sesión
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="reservation-main">
+
+    <section class="reservation-heading">
+      <span class="section-tag">
+        Reserva de evento
+      </span>
+
+      <h1>Confirmá tu experiencia</h1>
+
+      <p>
+        Revisá los datos del evento y seleccioná la cantidad
+        de personas antes de confirmar.
+      </p>
+    </section>
+
+    <section class="reservation-layout">
+
+      <article class="reservation-event-card">
+
+        <div
+          id="reservation-loading"
+          class="reservation-loading"
+        >
+          Cargando información del evento...
+        </div>
+
+        <div
+          id="reservation-event-content"
+          class="reservation-event-content"
+          hidden
+        >
+          <span
+            id="event-type"
+            class="event-card-type"
+          >
+            Evento
+          </span>
+
+          <h2 id="event-name">
+            Nombre del evento
+          </h2>
+
+          <p
+            id="event-description"
+            class="reservation-event-description"
+          >
+            Descripción del evento
+          </p>
+
+          <div class="reservation-event-details">
+
+            <p>
+              <strong>Fecha:</strong>
+              <span id="event-date">-</span>
+            </p>
+
+            <p>
+              <strong>Hora:</strong>
+              <span id="event-time">-</span>
+            </p>
+
+            <p>
+              <strong>Ubicación:</strong>
+              <span id="event-location">-</span>
+            </p>
+
+            <p>
+              <strong>Bodega:</strong>
+              <span id="event-winery">-</span>
+            </p>
+
+            <p>
+              <strong>Lugares disponibles:</strong>
+              <span id="event-capacity">-</span>
+            </p>
+
+            <p>
+              <strong>Precio por persona:</strong>
+              <span id="event-price">-</span>
+            </p>
+
+          </div>
+        </div>
+
+      </article>
+
+      <aside class="reservation-summary-card">
+
+        <h2>Detalle de la reserva</h2>
+
+        <form id="reservation-form">
+
+          <div class="form-group">
+            <label for="people-quantity">
+              Cantidad de personas
+            </label>
+
+            <input
+              id="people-quantity"
+              name="peopleQuantity"
+              type="number"
+              min="1"
+              value="1"
+              required
+            />
+
+            <small id="capacity-message">
+              Seleccioná la cantidad de asistentes.
+            </small>
+          </div>
+
+          <div class="reservation-total">
+            <span>Total a pagar</span>
+
+            <strong id="reservation-total">
+              $ 0
+            </strong>
+          </div>
+
+          <p
+            id="reservation-message"
+            class="form-message"
+          ></p>
+
+          <button
+            id="confirm-reservation-button"
+            class="primary-button"
+            type="submit"
+          >
+            Confirmar reserva
+          </button>
+
+        </form>
+
+      </aside>
+
+    </section>
+
+  </main>
+
+  <script src="../js/auth.js"></script>
+  <script src="../js/reservation.js"></script>
+
+</body>
+</html>

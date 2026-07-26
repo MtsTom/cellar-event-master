@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Cellar Event Master</title>
+
+  <link
+    rel="stylesheet"
+    href="./css/styles.css"
+  >
+</head>
+
+<body>
+  <header class="header">
+    <a href="#home" class="logo">
+      🍷 Cellar Event Master
+    </a>
+
+    <nav class="navbar" id="navbar">
+      <a href="#home">
+        Inicio
+      </a>
+
+      <a href="#about">
+        Acerca
+      </a>
+
+      <a href="#events">
+        Eventos
+      </a>
+
+      <a href="#gallery">
+        Galería
+      </a>
+
+      <a
+        href="./pages/login.html"
+        class="nav-btn"
+        id="loginLink"
+      >
+        Ingresar
+      </a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="home" id="home">
+      <div class="home-content">
+        <span class="tag">
+          Mendoza · Bodegas · Experiencias
+        </span>
+
+        <h1>
+          Descubrí eventos enológicos únicos
+        </h1>
+
+        <p>
+          Reservá catas, ferias y experiencias en bodegas
+          de Mendoza desde una plataforma simple y elegante.
+        </p>
+
+        <div class="actions">
+          <a
+            href="#events"
+            class="btn primary"
+          >
+            Ver eventos
+          </a>
+
+          <a
+            href="./pages/register.html"
+            class="btn secondary"
+            id="registerButton"
+          >
+            Crear cuenta
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="about-image">
+        <img
+          src="./images/about.jpg"
+          alt="Copas de vino"
+        >
+      </div>
+
+      <div class="about-content">
+        <span class="section-tag">
+          Sobre nosotros
+        </span>
+
+        <h2>
+          Una plataforma pensada para amantes del vino
+        </h2>
+
+        <p>
+          Cellar Event Master permite a clientes descubrir
+          eventos enológicos y a organizadores publicar
+          experiencias en distintas bodegas del país.
+        </p>
+      </div>
+    </section>
+
+    <section class="events" id="events">
+      <div class="section-title">
+        <span class="section-tag">
+          Próximos eventos
+        </span>
+
+        <h2>
+          Eventos disponibles
+        </h2>
+      </div>
+
+      <div
+        class="events-grid"
+        id="eventsContainer"
+      >
+        <p class="loading">
+          Cargando eventos...
+        </p>
+      </div>
+    </section>
+
+    <section class="gallery" id="gallery">
+      <div class="section-title">
+        <span class="section-tag">
+          Galería
+        </span>
+
+        <h2>
+          Bodegas destacadas
+        </h2>
+      </div>
+
+      <div class="gallery-grid">
+        <img
+          src="./images/gallery-1.jpg"
+          alt="Bodega 1"
+        >
+
+        <img
+          src="./images/gallery-2.jpg"
+          alt="Bodega 2"
+        >
+
+        <img
+          src="./images/gallery-3.jpg"
+          alt="Bodega 3"
+        >
+
+        <img
+          src="./images/gallery-4.jpg"
+          alt="Bodega 4"
+        >
+
+        <img
+          src="./images/gallery-5.jpg"
+          alt="Bodega 5"
+        >
+
+        <img
+          src="./images/gallery-6.jpg"
+          alt="Bodega 6"
+        >
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>
+      Cellar Event Master · Mendoza, Argentina
+    </p>
+  </footer>
+
+  <script src="./js/main.js"></script>
+</body>
+</html>

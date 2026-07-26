@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Panel del cliente | Cellar Event Master
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="../css/styles.css"
+  >
+</head>
+
+<body>
+  <header class="dashboard-header">
+    <a
+      href="../index.html"
+      class="logo"
+    >
+      🍷 Cellar Event Master
+    </a>
+
+    <nav class="dashboard-nav">
+      <a href="../index.html">
+        Inicio
+      </a>
+
+      <a href="profile.html">
+        Mi perfil
+      </a>
+
+      <a href="#reservations">
+        Mis reservas
+      </a>
+
+      <button
+        id="logoutButton"
+        class="logout-btn"
+        type="button"
+      >
+        Cerrar sesión
+      </button>
+    </nav>
+  </header>
+
+  <main class="dashboard-page">
+    <section class="dashboard-welcome">
+      <span class="section-tag">
+        Panel del cliente
+      </span>
+
+      <h1 id="welcomeTitle">
+        Bienvenido
+      </h1>
+
+      <p>
+        Desde este panel vas a poder consultar tus
+        reservas y administrar tu cuenta.
+      </p>
+    </section>
+
+    <section
+      class="dashboard-section"
+      id="reservations"
+    >
+      <div class="section-title">
+        <span class="section-tag">
+          Reservas
+        </span>
+
+        <h2>
+          Mis reservas
+        </h2>
+
+        <p>
+          Consultá todas las reservas que realizaste
+          y administrá tus experiencias en
+          Cellar Event Master.
+        </p>
+      </div>
+
+      <div
+        id="reservationsContainer"
+        class="reservations-grid"
+      >
+        <p class="loading">
+          Cargando reservas...
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/auth.js"></script>
+  <script src="../js/dashboard-client.js"></script>
+</body>
+</html>

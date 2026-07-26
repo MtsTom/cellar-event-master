@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Registrar bodega | Cellar Event Master
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="../css/styles.css"
+    >
+</head>
+
+<body>
+    <header class="main-header">
+        <nav class="navbar container">
+            <a
+                href="../index.html"
+                class="logo"
+            >
+                Cellar Event Master
+            </a>
+
+            <div class="nav-actions">
+                <a
+                    href="dashboard-organizer.html"
+                    class="secondary-button"
+                >
+                    Volver al dashboard
+                </a>
+
+                <button
+                    id="logout-button"
+                    class="secondary-button"
+                    type="button"
+                >
+                    Cerrar sesión
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="create-event-page container">
+        <section class="create-event-heading">
+            <p class="section-label">
+                Gestión de bodegas
+            </p>
+
+            <h1>
+                Registrar nueva bodega
+            </h1>
+
+            <p>
+                Completá los datos de la bodega para poder
+                asociarla a tus próximos eventos.
+            </p>
+        </section>
+
+        <section class="create-event-card">
+            <form
+                id="create-winery-form"
+                novalidate
+            >
+                <div class="form-group form-group-full">
+                    <label for="name">
+                        Nombre de la bodega
+                    </label>
+
+                    <input
+                        id="name"
+                        name="name"
+                        type="text"
+                        placeholder="Ejemplo: Bodega Valle de los Andes"
+                        required
+                    >
+                </div>
+
+                <div class="form-group form-group-full">
+                    <label for="location">
+                        Ubicación
+                    </label>
+
+                    <input
+                        id="location"
+                        name="location"
+                        type="text"
+                        placeholder="Ejemplo: Luján de Cuyo, Mendoza"
+                        required
+                    >
+                </div>
+
+                <div class="form-group form-group-full">
+                    <label for="capacity">
+                        Capacidad
+                    </label>
+
+                    <input
+                        id="capacity"
+                        name="capacity"
+                        type="number"
+                        min="1"
+                        step="1"
+                        placeholder="Ejemplo: 120"
+                        required
+                    >
+                </div>
+
+                <div class="form-group form-group-full">
+                    <label for="description">
+                        Descripción
+                    </label>
+
+                    <textarea
+                        id="description"
+                        name="description"
+                        rows="5"
+                        placeholder="Describí las características principales de la bodega"
+                        required
+                    ></textarea>
+                </div>
+
+                <div class="form-group form-group-full">
+                    <label for="available">
+                        Estado de la bodega
+                    </label>
+
+                    <select
+                        id="available"
+                        name="available"
+                        required
+                    >
+                        <option value="">
+                            Seleccionar estado
+                        </option>
+
+                        <option value="true">
+                            Disponible
+                        </option>
+
+                        <option value="false">
+                            No disponible
+                        </option>
+                    </select>
+                </div>
+
+                <div
+                    id="form-message"
+                    class="form-message"
+                    role="alert"
+                    aria-live="polite"
+                ></div>
+
+                <div class="create-event-actions">
+                    <a
+                        href="dashboard-organizer.html"
+                        class="secondary-button"
+                    >
+                        Volver
+                    </a>
+
+                    <button
+                        id="submit-button"
+                        class="primary-button"
+                        type="submit"
+                    >
+                        Registrar bodega
+                    </button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/create-winery.js"></script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Crear evento | Cellar Event Master</title>
+
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <nav class="navbar container">
+            <a href="../index.html" class="logo">
+                Cellar Event Master
+            </a>
+
+            <div class="nav-actions">
+                <a
+                    href="dashboard-organizer.html"
+                    class="secondary-button"
+                >
+                    Volver al dashboard
+                </a>
+
+                <button
+                    id="logout-button"
+                    class="secondary-button"
+                    type="button"
+                >
+                    Cerrar sesión
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="create-event-page container">
+        <section class="create-event-heading">
+            <p class="section-label">
+                Gestión de eventos
+            </p>
+
+            <h1>Crear nuevo evento</h1>
+
+            <p>
+                Completá los datos para publicar una nueva experiencia
+                enológica.
+            </p>
+        </section>
+
+        <section class="create-event-card">
+            <form id="create-event-form" novalidate>
+                <div class="form-group form-group-full">
+                    <label for="name">
+                        Nombre del evento
+                    </label>
+
+                    <input
+                        id="name"
+                        name="name"
+                        type="text"
+                        placeholder="Ejemplo: Cata de Malbec Reserva"
+                        required
+                    >
+                </div>
+
+                <div class="form-group form-group-full">
+                    <label for="description">
+                        Descripción
+                    </label>
+
+                    <textarea
+                        id="description"
+                        name="description"
+                        rows="5"
+                        placeholder="Describí la experiencia del evento"
+                        required
+                    ></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="date">
+                            Fecha
+                        </label>
+
+                        <input
+                            id="date"
+                            name="date"
+                            type="date"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="time">
+                            Hora
+                        </label>
+
+                        <input
+                            id="time"
+                            name="time"
+                            type="time"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group form-group-full">
+                    <label for="location">
+                        Ubicación
+                    </label>
+
+                    <input
+                        id="location"
+                        name="location"
+                        type="text"
+                        placeholder="Ejemplo: Luján de Cuyo, Mendoza"
+                        required
+                    >
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="capacity">
+                            Capacidad
+                        </label>
+
+                        <input
+                            id="capacity"
+                            name="capacity"
+                            type="number"
+                            min="1"
+                            step="1"
+                            placeholder="60"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="price">
+                            Precio por persona
+                        </label>
+
+                        <input
+                            id="price"
+                            name="price"
+                            type="number"
+                            min="0"
+                            step="1"
+                            placeholder="15000"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="type">
+                            Tipo de evento
+                        </label>
+
+                        <select
+                            id="type"
+                            name="type"
+                            required
+                        >
+                            <option value="">
+                                Seleccionar tipo
+                            </option>
+
+                            <option value="cata">
+                                Cata
+                            </option>
+
+                            <option value="visita">
+                                Visita guiada
+                            </option>
+
+                            <option value="feria">
+                                Feria
+                            </option>
+
+                            <option value="maridaje">
+                                Maridaje
+                            </option>
+
+                            <option value="otro">
+                                Otro
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="winery">
+                            Bodega
+                        </label>
+
+                        <select
+                            id="winery"
+                            name="winery"
+                            required
+                        >
+                            <option value="">
+                                Cargando bodegas...
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div
+                    id="form-message"
+                    class="form-message"
+                    role="alert"
+                ></div>
+
+                <div class="create-event-actions">
+                    <a
+                        href="dashboard-organizer.html"
+                        class="secondary-button"
+                    >
+                        Volver
+                    </a>
+
+                    <button
+                        id="submit-button"
+                        class="primary-button"
+                        type="submit"
+                    >
+                        Crear evento
+                    </button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/create-event.js"></script>
+</body>
+</html>
