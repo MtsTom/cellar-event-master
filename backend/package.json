@@ -5,7 +5,8 @@
   "main": "src/server.js",
   "scripts": {
     "dev": "node --watch src/server.js",
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "test": "jest"
   },
   "author": "Matías Tomasini",
   "license": "ISC",
@@ -17,5 +18,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.18.0",
     "nodemailer": "^7.0.5"
+  },
+  "devDependencies": {
+    "jest": "^30.4.2"
   }
 }
