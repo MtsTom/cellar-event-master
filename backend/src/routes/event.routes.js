@@ -30,4 +30,16 @@ router.post(
     eventController.createEvent
 );
 
+router.put(
+    "/:id",
+    protect,
+    eventController.updateEvent
+);
+
+router.patch(
+    "/:id/cancel",
+    protect,
+    eventController.cancelEvent
+);
+
 module.exports = router;

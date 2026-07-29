@@ -5,7 +5,7 @@ const createEvent = async (eventData) => {
 };
 
 const findAllEvents = async () => {
-    return await Event.find()
+    return await Event.find({ status: "activo" })
         .populate("winery", "name location")
         .populate("organizer", "firstName lastName email");
 };

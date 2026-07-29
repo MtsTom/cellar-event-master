@@ -274,21 +274,27 @@ const createEventCard = (event) => {
             </div>
 
             <div class="organizer-event-actions">
-                <button
-                    class="secondary-button edit-event-button"
-                    type="button"
-                    data-event-id="${event._id}"
-                >
-                    Editar
-                </button>
+                ${event.status === "activo" ? `
+                    <button
+                        class="secondary-button edit-event-button"
+                        type="button"
+                        data-event-id="${event._id}"
+                    >
+                        Editar
+                    </button>
 
-                <button
-                    class="danger-button cancel-event-button"
-                    type="button"
-                    data-event-id="${event._id}"
-                >
-                    Cancelar evento
-                </button>
+                    <button
+                        class="danger-button cancel-event-button"
+                        type="button"
+                        data-event-id="${event._id}"
+                    >
+                        Cancelar evento
+                    </button>
+                ` : `
+                    <p class="event-role-message">
+                        Este evento ya no admite modificaciones.
+                    </p>
+                `}
             </div>
         </article>
     `;
@@ -318,6 +324,77 @@ const renderOrganizerEvents = (
             .join("");
 
     updateOrganizerSummary(events);
+    addOrganizerEventActions();
+};
+
+const editEvent = (eventId) => {
+    window.location.href =
+        `create-event.html?eventId=${eventId}`;
+};
+
+const cancelEvent = async (eventId, button) => {
+    const confirmed = window.confirm(
+        "¿Estás seguro de que querés cancelar este evento? El evento dejará de estar disponible para nuevas reservas."
+    );
+
+    if (!confirmed) {
+        return;
+    }
+
+    const token = getStoredToken();
+    const originalText = button.textContent;
+
+    try {
+        button.disabled = true;
+        button.textContent = "Cancelando...";
+
+        const response = await fetch(
+            `${API_URL}/events/${eventId}/cancel`,
+            {
+                method: "PATCH",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        );
+
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+            throw new Error(
+                result.message ||
+                "No se pudo cancelar el evento"
+            );
+        }
+
+        window.alert("Evento cancelado correctamente");
+        await loadOrganizerEvents();
+    } catch (error) {
+        window.alert(error.message);
+        button.disabled = false;
+        button.textContent = originalText;
+    }
+};
+
+const addOrganizerEventActions = () => {
+    document
+        .querySelectorAll(".edit-event-button")
+        .forEach((button) => {
+            button.addEventListener("click", () => {
+                editEvent(button.dataset.eventId);
+            });
+        });
+
+    document
+        .querySelectorAll(".cancel-event-button")
+        .forEach((button) => {
+            button.addEventListener("click", () => {
+                cancelEvent(
+                    button.dataset.eventId,
+                    button
+                );
+            });
+        });
 };
 
 const loadOrganizerEvents = async () => {

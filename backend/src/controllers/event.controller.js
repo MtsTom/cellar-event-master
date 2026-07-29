@@ -72,9 +72,52 @@ const getOrganizerEvents = async (req, res) => {
     }
 };
 
+const updateEvent = async (req, res) => {
+    try {
+        const event = await eventService.updateEvent(
+            req.params.id,
+            req.body,
+            req.user
+        );
+
+        res.status(200).json({
+            success: true,
+            message: "Evento actualizado correctamente",
+            data: event
+        });
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
+const cancelEvent = async (req, res) => {
+    try {
+        const event = await eventService.cancelEvent(
+            req.params.id,
+            req.user
+        );
+
+        res.status(200).json({
+            success: true,
+            message: "Evento cancelado correctamente",
+            data: event
+        });
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
 module.exports = {
     createEvent,
     getEvents,
     getEventById,
-    getOrganizerEvents
+    getOrganizerEvents,
+    updateEvent,
+    cancelEvent
 };

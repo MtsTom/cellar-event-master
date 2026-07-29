@@ -7,8 +7,13 @@ const winerySelect = document.getElementById("winery");
 const formMessage = document.getElementById("form-message");
 const submitButton = document.getElementById("submit-button");
 const logoutButton = document.getElementById("logout-button");
+const formTitle = document.getElementById("form-title");
+const formDescription = document.getElementById("form-description");
 
 const token = getStoredToken();
+const params = new URLSearchParams(window.location.search);
+const eventId = params.get("eventId");
+const isEditMode = Boolean(eventId);
 
 const showMessage = (message, type = "error") => {
   formMessage.textContent = message;
@@ -20,14 +25,34 @@ const clearMessage = () => {
   formMessage.className = "form-message";
 };
 
+const setPageMode = () => {
+  if (!isEditMode) {
+    return;
+  }
+
+  document.title = "Editar evento | Cellar Event Master";
+  formTitle.textContent = "Editar evento";
+  formDescription.textContent =
+    "Modificá los datos del evento y guardá los cambios.";
+  submitButton.textContent = "Guardar cambios";
+};
+
 const setLoading = (isLoading) => {
   submitButton.disabled = isLoading;
-  submitButton.textContent = isLoading
-    ? "Creando evento..."
+
+  if (isLoading) {
+    submitButton.textContent = isEditMode
+      ? "Guardando cambios..."
+      : "Creando evento...";
+    return;
+  }
+
+  submitButton.textContent = isEditMode
+    ? "Guardar cambios"
     : "Crear evento";
 };
 
-const loadWineries = async () => {
+const loadWineries = async (selectedWineryId = "") => {
   try {
     winerySelect.disabled = true;
 
@@ -65,6 +90,7 @@ const loadWineries = async () => {
 
       option.value = winery._id;
       option.textContent = `${winery.name} - ${winery.location}`;
+      option.selected = winery._id === selectedWineryId;
 
       winerySelect.appendChild(option);
     });
@@ -78,6 +104,54 @@ const loadWineries = async () => {
     showMessage(error.message);
   } finally {
     winerySelect.disabled = false;
+  }
+};
+
+const formatDateForInput = (date) => {
+  return new Date(date).toISOString().split("T")[0];
+};
+
+const loadEventForEditing = async () => {
+  try {
+    showMessage("Cargando datos del evento...", "success");
+    setLoading(true);
+
+    const response = await fetch(`${API_URL}/events/${eventId}`);
+    const result = await response.json();
+
+    if (!response.ok || !result.success) {
+      throw new Error(
+        result.message || "No se pudo cargar el evento"
+      );
+    }
+
+    const event = result.data;
+
+    if (event.status !== "activo") {
+      throw new Error("Solo se pueden editar eventos activos");
+    }
+
+    form.elements.name.value = event.name;
+    form.elements.description.value = event.description;
+    form.elements.date.value = formatDateForInput(event.date);
+    form.elements.time.value = event.time;
+    form.elements.location.value = event.location;
+    form.elements.capacity.value = event.capacity;
+    form.elements.price.value = event.price;
+    form.elements.type.value = event.type;
+
+    const wineryId = event.winery?._id || event.winery;
+    await loadWineries(wineryId);
+
+    clearMessage();
+  } catch (error) {
+    showMessage(error.message);
+    form.querySelectorAll("input, textarea, select, button[type='submit']")
+      .forEach((element) => {
+        element.disabled = true;
+      });
+  } finally {
+    setLoading(false);
   }
 };
 
@@ -115,15 +189,19 @@ const validateFormData = (eventData) => {
   return null;
 };
 
-const createEvent = async (eventData) => {
-  const response = await fetch(`${API_URL}/events`, {
-    method: "POST",
+const saveEvent = async (eventData) => {
+  const url = isEditMode
+    ? `${API_URL}/events/${eventId}`
+    : `${API_URL}/events`;
 
+  const method = isEditMode ? "PUT" : "POST";
+
+  const response = await fetch(url, {
+    method,
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`
     },
-
     body: JSON.stringify(eventData)
   });
 
@@ -131,7 +209,10 @@ const createEvent = async (eventData) => {
 
   if (!response.ok || !result.success) {
     throw new Error(
-      result.message || "No se pudo crear el evento"
+      result.message ||
+      (isEditMode
+        ? "No se pudo actualizar el evento"
+        : "No se pudo crear el evento")
     );
   }
 
@@ -167,14 +248,14 @@ form.addEventListener("submit", async (event) => {
   try {
     setLoading(true);
 
-    await createEvent(eventData);
+    await saveEvent(eventData);
 
     showMessage(
-      "Evento creado correctamente. Redirigiendo...",
+      isEditMode
+        ? "Evento actualizado correctamente. Redirigiendo..."
+        : "Evento creado correctamente. Redirigiendo...",
       "success"
     );
-
-    form.reset();
 
     setTimeout(() => {
       window.location.href = "dashboard-organizer.html";
@@ -191,4 +272,10 @@ logoutButton.addEventListener("click", () => {
   window.location.href = "login.html";
 });
 
-loadWineries();
+setPageMode();
+
+if (isEditMode) {
+  loadEventForEditing();
+} else {
+  loadWineries();
+}
