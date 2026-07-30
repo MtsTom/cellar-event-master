@@ -153,6 +153,14 @@ const renderReservations = (reservations) => {
             ${reservation.peopleQuantity}
           </p>
 
+          <p>
+            <strong>Pago:</strong>
+            ${reservation.paymentMethod ? reservation.paymentMethod : "No informado"}
+            ${reservation.paymentStatus ? `· ${reservation.paymentStatus}` : ""}
+          </p>
+
+          ${reservation.reservationCode ? `<p><strong>Código:</strong> ${reservation.reservationCode}</p>` : ""}
+
           <p class="reservation-price">
             ${formatPrice(reservation.totalPrice)}
           </p>

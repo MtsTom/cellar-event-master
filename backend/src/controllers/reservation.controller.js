@@ -33,6 +33,25 @@ const getMyReservations = async (req, res) => {
     }
 };
 
+const getReservationById = async (req, res) => {
+    try {
+        const reservation = await reservationService.getReservationById(
+            req.params.id,
+            req.user
+        );
+
+        res.status(200).json({
+            success: true,
+            data: reservation
+        });
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
 const cancelReservation = async (req, res) => {
     try {
         const reservation = await reservationService.cancelReservation(
@@ -56,6 +75,7 @@ const cancelReservation = async (req, res) => {
 module.exports = {
     createReservation,
     getMyReservations,
+    getReservationById,
     cancelReservation
 
 };

@@ -1,6 +1,13 @@
 const reservationRepository = require("../repositories/reservation.repository");
 const eventRepository = require("../repositories/event.repository");
 
+const createReservationCode = () => {
+    const datePart = Date.now().toString(36).toUpperCase();
+    const randomPart = Math.random().toString(36).slice(2, 7).toUpperCase();
+
+    return `CEM-${datePart}-${randomPart}`;
+};
+
 const createReservation = async (reservationData, user) => {
     if (user.role !== "cliente") {
         throw new Error("Solo los clientes pueden reservar eventos");
@@ -20,6 +27,12 @@ const createReservation = async (reservationData, user) => {
         throw new Error("No hay capacidad suficiente para esta reserva");
     }
 
+    const allowedPaymentMethods = ["tarjeta", "transferencia", "efectivo"];
+
+    if (!allowedPaymentMethods.includes(reservationData.paymentMethod)) {
+        throw new Error("Seleccioná un medio de pago válido");
+    }
+
     const totalPrice = reservationData.peopleQuantity * event.price;
 
     const reservation = await reservationRepository.createReservation({
@@ -27,7 +40,10 @@ const createReservation = async (reservationData, user) => {
         event: event._id,
         peopleQuantity: reservationData.peopleQuantity,
         totalPrice,
-        status: "confirmada"
+        status: "confirmada",
+        paymentMethod: reservationData.paymentMethod,
+        paymentStatus: "aprobado",
+        reservationCode: createReservationCode()
     });
 
     event.availableCapacity = event.availableCapacity - reservationData.peopleQuantity;
@@ -42,6 +58,26 @@ const getMyReservations = async (user) => {
     }
 
     return await reservationRepository.findReservationsByClient(user.id);
+};
+
+const getReservationById = async (reservationId, user) => {
+    if (user.role !== "cliente") {
+        throw new Error("Solo los clientes pueden ver una reserva");
+    }
+
+    const reservation = await reservationRepository.findReservationDetailById(
+        reservationId
+    );
+
+    if (!reservation) {
+        throw new Error("La reserva no existe");
+    }
+
+    if (reservation.client._id.toString() !== user.id) {
+        throw new Error("No podés ver una reserva que no te pertenece");
+    }
+
+    return reservation;
 };
 
 const cancelReservation = async (reservationId, user) => {
@@ -88,5 +124,6 @@ const cancelReservation = async (reservationId, user) => {
 module.exports = {
     createReservation,
     getMyReservations,
+    getReservationById,
     cancelReservation
 };

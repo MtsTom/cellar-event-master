@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comprobante de reserva | Cellar Event Master</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body class="reservation-page receipt-page">
+  <header class="main-header">
+    <nav class="navbar">
+      <a href="../index.html" class="logo">🍷 Cellar Event Master</a>
+      <div class="nav-actions">
+        <a href="./dashboard-client.html" class="secondary-button">Mis reservas</a>
+        <button id="logout-button" class="secondary-button" type="button">Cerrar sesión</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="reservation-main receipt-main">
+    <section id="receipt-loading" class="reservation-event-card">Cargando comprobante...</section>
+
+    <article id="receipt-card" class="receipt-card" hidden>
+      <div class="receipt-success-icon">✓</div>
+      <span class="section-tag">Reserva confirmada</span>
+      <h1>¡Tu experiencia está reservada!</h1>
+      <p class="receipt-intro">Guardá este comprobante para presentarlo el día del evento.</p>
+
+      <div class="receipt-code-box">
+        <span>Código de reserva</span>
+        <strong id="receipt-code">-</strong>
+      </div>
+
+      <div class="receipt-details">
+        <p><span>Evento</span><strong id="receipt-event">-</strong></p>
+        <p><span>Fecha y hora</span><strong id="receipt-date">-</strong></p>
+        <p><span>Ubicación</span><strong id="receipt-location">-</strong></p>
+        <p><span>Personas</span><strong id="receipt-people">-</strong></p>
+        <p><span>Medio de pago</span><strong id="receipt-payment-method">-</strong></p>
+        <p><span>Estado del pago</span><strong id="receipt-payment-status">-</strong></p>
+        <p class="receipt-total-row"><span>Total</span><strong id="receipt-total">-</strong></p>
+      </div>
+
+      <p class="demo-notice">Comprobante generado en un entorno de demostración. No representa un cobro real.</p>
+
+      <div class="receipt-actions">
+        <button id="print-receipt-button" class="secondary-button" type="button">Imprimir comprobante</button>
+        <a href="./dashboard-client.html" class="primary-button">Ver mis reservas</a>
+      </div>
+    </article>
+  </main>
+
+  <script src="../js/auth.js"></script>
+  <script src="../js/reservation-success.js"></script>
+</body>
+</html>

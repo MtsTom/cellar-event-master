@@ -27,6 +27,22 @@ const reservationSchema = new mongoose.Schema(
             enum: ["pendiente", "confirmada", "cancelada"],
             default: "confirmada"
         },
+        paymentMethod: {
+            type: String,
+            enum: ["tarjeta", "transferencia", "efectivo"],
+            default: "efectivo"
+        },
+        paymentStatus: {
+            type: String,
+            enum: ["pendiente", "aprobado"],
+            default: "aprobado"
+        },
+        reservationCode: {
+            type: String,
+            unique: true,
+            sparse: true,
+            trim: true
+        },
         reservationDate: {
             type: Date,
             default: Date.now

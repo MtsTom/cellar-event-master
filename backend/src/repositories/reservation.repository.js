@@ -13,6 +13,12 @@ const findReservationById = async (reservationId) => {
     return await Reservation.findById(reservationId);
 };
 
+const findReservationDetailById = async (reservationId) => {
+    return await Reservation.findById(reservationId)
+        .populate("event", "name date time location price status winery")
+        .populate("client", "firstName lastName email");
+};
+
 const findReservationsByEvent = async (eventId) => {
     return await Reservation.find({
         event: eventId,
@@ -24,5 +30,6 @@ module.exports = {
     createReservation,
     findReservationsByClient,
     findReservationById,
+    findReservationDetailById,
     findReservationsByEvent
 };

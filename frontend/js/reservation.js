@@ -326,95 +326,21 @@
       return;
     }
 
-    const token = getStoredToken();
-
-    if (!token) {
-      redirectToLogin();
-      return;
-    }
-
     const quantityInput =
       document.getElementById(
         "people-quantity"
       );
 
-    const confirmButton =
-      document.getElementById(
-        "confirm-reservation-button"
-      );
-
-    if (!quantityInput || !confirmButton) {
-      return;
-    }
-
-    /*
-      Evita que se envíen varias reservas si el usuario
-      hace doble clic o pulsa nuevamente mientras la
-      primera petición todavía se está procesando.
-    */
-    if (confirmButton.disabled) {
+    if (!quantityInput) {
       return;
     }
 
     const peopleQuantity =
       Number(quantityInput.value);
 
-    try {
-      setButtonLoading(
-        confirmButton,
-        true
-      );
-
-      const response = await fetch(
-        `${API_URL}/reservations`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type":
-              "application/json",
-            Authorization:
-              `Bearer ${token}`
-          },
-          body: JSON.stringify({
-            event: selectedEvent._id,
-            peopleQuantity
-          })
-        }
-      );
-
-      const result = await response.json();
-
-      if (!response.ok || !result.success) {
-        throw new Error(
-          result.message ||
-          "No se pudo crear la reserva"
-        );
-      }
-
-      quantityInput.disabled = true;
-
-      setButtonSuccess(confirmButton);
-
-      showMessage(
-        "¡Reserva creada correctamente! Redirigiendo a tus reservas...",
-        "success"
-      );
-
-      setTimeout(() => {
-        window.location.href =
-          "./dashboard-client.html";
-      }, 2000);
-    } catch (error) {
-      showMessage(
-        error.message,
-        "error"
-      );
-
-      setButtonLoading(
-        confirmButton,
-        false
-      );
-    }
+    window.location.href =
+      `./payment.html?eventId=${encodeURIComponent(selectedEvent._id)}` +
+      `&people=${encodeURIComponent(peopleQuantity)}`;
   };
 
   const setButtonLoading = (
@@ -428,8 +354,8 @@
     button.disabled = isLoading;
 
     button.textContent = isLoading
-      ? "Confirmando reserva..."
-      : "Confirmar reserva";
+      ? "Procesando..."
+      : "Continuar al pago";
   };
 
   const setButtonSuccess = (button) => {
